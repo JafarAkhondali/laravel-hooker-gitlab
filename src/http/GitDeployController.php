@@ -219,7 +219,7 @@ class GitDeployController extends Controller
 
 		}
 
-		return Response::json(true);
+		return Response::json(print_r($command_info,true));
 	}
 
 
