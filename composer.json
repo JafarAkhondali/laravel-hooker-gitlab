@@ -1,0 +1,22 @@
+{
+    "name": "jafarakhondali/easy-laravel-webhook-deployer",
+    "description": "Easy Github and GitLab Webhook deployer for Laravel",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "jafarakhondali\\GitDeploy\\": "src"
+        }
+    },
+    "require": {
+        "illuminate/http": "~5",
+        "illuminate/config": "~5",
+        "illuminate/support": "~5"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "jafarakhondali\\GitDeploy\\GitDeployServiceProvider"
+            ]
+        }
+    }
+}
