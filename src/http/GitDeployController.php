@@ -160,18 +160,20 @@ class GitDeployController extends Controller
 
 		// Executing command
 		Log::info('Gitdeploy: Executing command in git repo');
-		$cmd = escapeshellcmd($git_path) . 
-			' --git-dir=' . escapeshellarg($repo_dir . '/.git') .
-			' ' . escapeshellarg($git_cmd) . ' > ' . escapeshellarg($repo_dir . '/storage/logs/gitdeploy.log');
+
+		$cmd = escapeshellcmd($git_path) .
+			' --git-dir="' . escapeshellarg($repo_dir . '/.git"') .
+			' ' . $git_cmd ;
+		$command_output=shell_exec($cmd);
 
 		$command_info = [
 			'cmd' => $cmd,
 			'user' => shell_exec('whoami'),
-			'response' => shell_exec($cmd),
+			'response' => $command_output,
 		];
 
 		//Log data in log file
-		Log::info(print_r($command_info,true));
+		Log::info(json_encode($command_info));
 
 		// Put site back up and end maintenance mode
 		if (!empty(config('gitdeploy.maintenance_mode'))) {
@@ -219,7 +221,7 @@ class GitDeployController extends Controller
 
 		}
 
-		return Response::json(print_r($command_info,true));
+		return Response::json(json_encode($command_info));
 	}
 
 
