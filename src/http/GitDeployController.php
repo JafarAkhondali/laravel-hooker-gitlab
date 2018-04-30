@@ -161,9 +161,9 @@ class GitDeployController extends Controller
 		// Executing command
 		Log::info('Gitdeploy: Executing command in git repo');
 
-		$cmd = escapeshellcmd($git_path) .
-			' --git-dir="' . escapeshellarg($repo_dir . '/.git"') .
-			' ' . $git_cmd ;
+		$cmd =
+			'cd '. $repo_dir . ' && '.
+			'/usr/local/cpanel/3rdparty/lib/path-bin/git pull 2>&1';
 		$command_output=shell_exec($cmd);
 
 		$command_info = [
